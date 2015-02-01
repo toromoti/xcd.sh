@@ -48,7 +48,7 @@ xcd_jump() {
   fi
 
   if [ "$1" ]; then
-    if [[ $1 =~ ^([0-9]|[1-9]+[0-9]+)$ ]]; then
+    if [ "$1" -ge 0 ] && [ "$1" -lt "${#XCD_Q[@]}" ]; then
       if [ "$2" = "==" ]; then
         if builtin cd "${XCD_Q[$1]}" ; then
           XCD_Q_INDEX=$1
