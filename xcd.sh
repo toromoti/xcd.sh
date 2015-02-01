@@ -142,7 +142,6 @@ xcd_init() {
   XCD_Q_INDEX=0
 }
 
-== () { xcd_jump "$1" "=="; }
 = () { xcd_jump "$1"; }
 - () { xcd_minus; }
 + () { xcd_plus; }
