@@ -24,19 +24,17 @@ xcd_show() {
 
 xcd_minus() {
   if [ ! "$XCD_Q_INDEX" = "$((${#XCD_Q[@]}-1))" ]; then
-    xcd_jump $((XCD_Q_INDEX+1)) "=="
+    xcd_jump $((XCD_Q_INDEX+1)) "move_index"
   else
-    xcd_err 'no backward'
-    return 1
+    xcd_jump 0 "move_index"
   fi
 }
 
 xcd_plus() {
   if [ ! "$XCD_Q_INDEX" = '0' ]; then
-    xcd_jump $((XCD_Q_INDEX-1)) "=="
+    xcd_jump $((XCD_Q_INDEX-1)) "move_index"
   else
-    xcd_err 'no forward'
-    return 1
+    xcd_jump $((${#XCD_Q[@]}-1)) "move_index"
   fi
 }
 
@@ -49,7 +47,7 @@ xcd_jump() {
 
   if [ "$1" ]; then
     if [ "$1" -ge 0 ] && [ "$1" -lt "${#XCD_Q[@]}" ]; then
-      if [ "$2" = "==" ]; then
+      if [ "$2" = "move_index" ]; then
         if builtin cd "${XCD_Q[$1]}" ; then
           XCD_Q_INDEX=$1
         else
