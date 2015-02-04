@@ -15,9 +15,9 @@ xcd_show() {
   do
     easypath="$(echo "${XCD_Q[$i]}" | sed "s|^$HOME|~|")"
     if [ "$i" = "$XCD_Q_INDEX" ]; then
-      printf "* %${keta}d $easypath\n" "$i"
+      printf "* %${keta}d  $easypath\n" "$i"
     else
-      printf "  %${keta}d $easypath\n" "$i"
+      printf "  %${keta}d  $easypath\n" "$i"
     fi
   done
 }
@@ -62,6 +62,9 @@ xcd_jump() {
     fi
   else
     xcd_show
+    echo -n 'select number: '
+    read i
+    [ "$i" ] && xcd_jump $i
   fi
 }
 
